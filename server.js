@@ -1,10 +1,14 @@
 const express = require('express');
 const app = express();
 const db = require('./db');
+require('dotenv').config();
 
 // use the body parser to parse the request
 const bodyParser = require('body-parser');
 app.use(bodyParser.json()); // req.body
+
+// Define the port number to listen on
+const PORT = process.env.PORT || 3000;
 
 // Import the router files
 const personRoutes = require('./routes/personRoutes');
@@ -14,16 +18,13 @@ const menuItemRoutes = require('./routes/menuitemRoutes');
 app.use('/person', personRoutes);
 app.use('/menu', menuItemRoutes);
 
-// Define the port number to listen on
-const port = 3000;
-
 app.get('/', (_req, res) => {
   res.send('Welcome to my Hotel...How can I help You ? ');
 });
 
 
-app.listen(port, () => {
-  console.log(`listening on port ${port}`);
+app.listen(PORT, () => {
+  console.log('listening on port 3000');
 });
 
 
